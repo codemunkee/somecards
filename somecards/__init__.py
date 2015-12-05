@@ -19,15 +19,18 @@ tasks = [
 
 from flask import make_response
 
+
 @app.errorhandler(404)
 def not_Found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
+
 
 @app.route('/todo/api/v1.0/tasks', methods=['GET'])
 def get_tasks():
     return jsonify({'tasks': [make_public_task(task) for task in tasks]})
 
 from flask import abort
+
 
 @app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
 def get_task(task_id):
