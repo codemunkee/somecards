@@ -9,5 +9,6 @@ setup(
     author='Russ Nealis',
     author_email='codemunkee@gmail.com',
     description='API for somecards App',
-    install_requires=['Flask==0.10.1']
+    install_requires=['Flask==0.10.1',
+                      'Flask-SQLAlchemy==2.1']
 )
