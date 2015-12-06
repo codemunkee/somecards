@@ -6,14 +6,15 @@ from .forms import CardForm
 @app.route('/')
 def index():
     cards = models.Card.query.all()
-    return render_template("index.html",
+    return render_template('index.html',
                            cards=cards)
+
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     form = CardForm()
     if form.validate_on_submit():
-        flash('New Card Added!')
+        flash('New Card Added, Question: %s' % form.question.data)
         return redirect('/add')
 
     return render_template('add.html',

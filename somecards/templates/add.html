@@ -1,4 +1,18 @@
 {% extends "base.html" %}}
 {% block content %}
-    <h2>As I always say: the more cards the better.</h2>
+
+<h2>As I always say: the more cards the better.</h2>
+
+<form action="" method="post" name="addCard">
+    {{form.hidden_tag() }}
+    <p>
+        Question:
+        {{ form.question(size=100) }}
+    </p>
+    <p>
+        Answer:
+        {{ form.answer(size=100) }}
+    </p>
+    <p><input type="submit" value="Add Card"></p>
+</form>
 {% endblock %}
