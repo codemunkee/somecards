@@ -13,7 +13,6 @@ def index():
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     form = AddCardForm()
-    print request.form
 
     if form.validate_on_submit():
         new_card = models.Card(form.question.data, form.answer.data)
