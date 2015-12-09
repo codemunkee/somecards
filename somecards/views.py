@@ -10,8 +10,9 @@ def index():
                            cards=cards)
 
 
-@app.route('/add', methods=['GET', 'POST'])
-def add():
+@app.route('/add/<int:category_id>', methods=['GET', 'POST'])
+def add_to_category():
+
     form = AddCardForm()
 
     if form.validate_on_submit():
@@ -25,11 +26,18 @@ def add():
                            form=form)
 
 
+@app.route('/add', methods=['GET'])
+def add():
+
+    print 'We need a category'
+    categories = models.Category.query.all()
+    return render_template('add.html', categories=categories)
+
+
 @app.route('/review')
 def review():
     cards = models.Card.query.all()
     return render_template('review.html', cards=cards)
-
 
 
 @app.route('/remove', methods=['GET', 'POST'])
