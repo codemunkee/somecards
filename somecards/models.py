@@ -21,9 +21,10 @@ class Card(db.Model):
     answer = db.Column(db.String(600), index=False, unique=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
 
-    def __init__(self, question, answer):
+    def __init__(self, question, answer, category_id):
         self.question = question
         self.answer = answer
+        self.category_id = category_id
 
     def __repr__(self):
         return '<Question %r>' % self.question

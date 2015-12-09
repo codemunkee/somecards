@@ -11,16 +11,16 @@ def index():
 
 
 @app.route('/add/<int:category_id>', methods=['GET', 'POST'])
-def add_to_category():
+def add_to_category(category_id):
 
     form = AddCardForm()
 
     if form.validate_on_submit():
-        new_card = models.Card(form.question.data, form.answer.data)
+        new_card = models.Card(form.question.data, form.answer.data, category_id)
         db.session.add(new_card)
         db.session.commit()
         flash('New Card Added, Question: %s' % form.question.data)
-        return redirect('/add')
+        return redirect('/add/%s' % category_id)
 
     return render_template('add.html',
                            form=form)
@@ -28,8 +28,6 @@ def add_to_category():
 
 @app.route('/add', methods=['GET'])
 def add():
-
-    print 'We need a category'
     categories = models.Category.query.all()
     return render_template('add.html', categories=categories)
 
