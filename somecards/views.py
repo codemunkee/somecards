@@ -27,7 +27,9 @@ def add():
 
 @app.route('/remove', methods=['GET', 'POST'])
 def remove():
+    cards = [(card.id, card.question) for card in models.Card.query.all()]
     form = RemoveCardForm()
+    form.card.choices = cards
     if form.is_submitted():
         models.Card.query.filter_by(id=form.card.data).delete()
         db.session.commit()
@@ -36,5 +38,7 @@ def remove():
 
     return render_template('remove.html',
                            form=form)
+
+
 
 
