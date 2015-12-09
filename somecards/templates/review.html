@@ -1,0 +1,7 @@
+{% extends "base.html" %}}
+{% block content %}
+    <h2>By default, let's just show all of the cards!</h2>
+    {% for card in cards %}
+    <div><p>{{card.id}}: {{ card.question}} <b>{{card.answer}}</b></div>
+    {% endfor %}
+{% endblock %}

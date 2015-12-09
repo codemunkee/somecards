@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, request
+from flask import render_template, flash, redirect
 from somecards import app, models, db
 from .forms import AddCardForm, RemoveCardForm
 
@@ -23,6 +23,13 @@ def add():
 
     return render_template('add.html',
                            form=form)
+
+
+@app.route('/review')
+def review():
+    cards = models.Card.query.all()
+    return render_template('review.html', cards=cards)
+
 
 
 @app.route('/remove', methods=['GET', 'POST'])

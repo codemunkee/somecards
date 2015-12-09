@@ -9,5 +9,4 @@ class AddCardForm(Form):
 
 
 class RemoveCardForm(Form):
-    #card = SelectField(choices=[(card.id, card.question) for card in models.Card.query.all()])
     card = SelectField(choices=[])

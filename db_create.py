@@ -9,10 +9,16 @@ db.create_all()
 
 # add a couple cards off the bat
 
-card1 = models.Card('How many miles to the moon?', '239 thousand')
-card2 = models.Card('How many miles to the sun?', '93 million')
+category1 = models.Category('Random')
+category2 = models.Category('Docker')
 
-db.session.add(card1)
-db.session.add(card2)
+db.session.add(category1)
+db.session.add(category2)
+
+category1.cards = [
+    models.Card('How many miles to the moon?', '239 thousand'),
+    models.Card('How many miles to the sun?', '93 million')]
+
+db.session.add(category1)
 
 db.session.commit()
