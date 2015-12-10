@@ -34,14 +34,21 @@ def add():
 
 @app.route('/review')
 def review():
-    cards = models.Card.query.all()
+    categories = models.Category.query.all()
+    return render_template('review.html', categories=categories)
+
+
+@app.route('/review/<int:category_id>')
+def review_category(category_id):
+    cards = models.Card.query.filter_by(category_id=category_id)
     return render_template('review.html', cards=cards)
 
 
 @app.route('/remove/<int:category_id>', methods=['GET', 'POST'])
 def remove_from_category(category_id):
     # cards = [(card.id, card.question) for card in models.Card.query.all()]
-    cards = [(card.id, card.question) for card in models.Card.query.filter_by(category_id=category_id)]
+    cards = [(card.id, card.question)
+             for card in models.Card.query.filter_by(category_id=category_id)]
     form = RemoveCardForm()
     form.card.choices = cards
     if form.is_submitted():
