@@ -3,7 +3,7 @@
 
 {% if categories %}
 
-<h2>We've got categories!</h2>
+<h2>Select a category to add a card to:</h2>
 
     {% for category in categories %}
     <h2></h2><a href="/add/{{ category.id }}">{{ category.name }}</a></h2>

@@ -1,11 +1,23 @@
 {% extends "base.html" %}}
 {% block content %}
 
-<h2>As I always say: you probably have too many cards.</h2>
+{% if categories %}
+
+<h2>Select a category to remove a card from:</h2>
+
+    {% for category in categories %}
+    <h2></h2><a href="/remove/{{ category.id }}">{{ category.name }}</a></h2>
+    {% endfor %}
+{% endif %}
+
+{% if form %}
 
 <form action="" method="post" name="removeCard">
     {{ form.hidden_tag() }}
     {{ form.card }}
     <p><input type="submit" value="Remove Card"></p>
 </form>
+
+{% endif %}
+
 {% endblock %}
