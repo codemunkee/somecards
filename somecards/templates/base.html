@@ -1,10 +1,29 @@
-<html>
-  <head>
-    <title>somecards</title>
-  </head>
-  <body>
-    <div>somecards: <a href="/">Home</a> | <a href="/add">Add a Card</a> | <a href="/remove">Remove a Card</a> | <a href="/review">Review Cards</a></div>
-    <hr>
+{% extends "bootstrap/base.html" %}
+{% block title %}somecards{% endblock %}
+{% block navbar %}
+
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="/add">Add a Card</a>
+            <a class="navbar-brand" href="/remove">Remove a Card</a>
+            <a class="navbar-brand" href="/review">Review Cards</a>
+        </div>
+    </div>
+</div>
+
+
+
+<div></div>
+{% endblock %}
+{% block content %}
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul>
@@ -14,5 +33,4 @@
         </ul>
       {% endif %}
     {% endwith %}
-    {% block content %}{% endblock %}
-  </body>
+{% endblock %}

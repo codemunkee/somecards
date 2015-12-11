@@ -12,5 +12,7 @@ setup(
     install_requires=['Flask==0.10.1',
                       'Flask-SQLAlchemy==2.1',
                       'WTForms==2.0.2',
-                      'Flask-WTF==0.12']
+                      'Flask-WTF==0.12',
+                      'Flask-Script==2.0.5',
+                      'Flask-Bootstrap==3.3.5.7']
 )
