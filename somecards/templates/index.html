@@ -1,7 +1,14 @@
 {% extends "base.html" %}}
 {% block content %}
-    <h2>Flash Card Categories</h2>
-    {% for category in categories %}
-    <div><p>{{ category.name }}</b></div>
+    <div class="container">
+        <div class="page-header">
+            <h3>Flash Card Categories</h3>
+        </div>
+    </div>
+    <div class="panel-info">
+        {% for category in categories %}
+        <p>{{ category.name }}</p>
     {% endfor %}
+    </div>
+
 {% endblock %}

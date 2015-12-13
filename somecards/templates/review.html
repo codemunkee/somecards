@@ -10,11 +10,10 @@
 
 {% endif %}
 
-{% if cards %}
+{% if card %}
 
-    {% for card in cards %}
-    <div><p>{{card.id}}: {{ card.question}} <b>{{card.answer}}</b></div>
-    {% endfor %}
+    <div><p>{{ card.question}} <b>{{card.answer}}</b></div>
+
 {% endif %}
 
 {% endblock %}
