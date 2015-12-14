@@ -12,16 +12,13 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
 {% block content %}
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
         <ul>
-          {% for message in messages %}
             <li>{{ message }}</li>
-          {% endfor %}
         </ul>
-      {% endif %}
-    {% endwith %}
+    {% endfor %}
+</div>
 {% endblock %}

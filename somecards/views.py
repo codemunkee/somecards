@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, session, request, url_for
 from somecards import app, models, db
-from .forms import AddCardForm, RemoveCardForm
+from .forms import AddCardForm, RemoveCardForm, ReviewForm
 
 
 @app.route('/')
@@ -41,6 +41,8 @@ def review():
 @app.route('/review/<int:category_id>', methods=['GET', 'POST'])
 def review_category(category_id):
 
+    form = ReviewForm()
+
     # Get our cards for the specific category
     cards = [(card.id, card.question, card.answer)
              for card in models.Card.query.filter_by(category_id=category_id)]
@@ -59,7 +61,16 @@ def review_category(category_id):
 
     print session['review'][str(category_id)]['current_index']
 
-    return render_template('review.html', card=card)
+
+    if form.validate_on_submit():
+        session['review'][str(category_id)]['current_index'] += 1
+        if session['review'][str(category_id)]['current_index'] >= len(cards):
+            flash('All questions complete!')
+            print 'flashed!'
+            session['review'][str(category_id)]['current_index'] = 0
+
+
+    return render_template('review.html', card=card, form=form)
 
 
 @app.route('/remove/<int:category_id>', methods=['GET', 'POST'])

@@ -1,19 +1,46 @@
 {% extends "base.html" %}}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
 {% block content %}
-{% if categories %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+        <ul>
+            <li>{{ message }}</li>
+        </ul>
+    {% endfor %}
+</div>
 
-    <h2>Select a category to review:</h2>
 
-        {% for category in categories %}
-        <h2></h2><a href="/review/{{ category.id }}">{{ category.name }}</a></h2>
-        {% endfor %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body" >
+            <div class="well-lg">
+            {% if categories %}
+                <h2>Select a category to review:</h2>
+                    {% for category in categories %}
+                    <a href="/review/{{ category.id }}">{{ category.name }}</a></h2>
+                    <br>
+                {% endfor %}
+            {% endif %}
+            {% if card %}
+                <div class="page-header">
+                    <h3>Question</h3>
+                    {{ card.question}}
+                </div>
+                <div id="myId" class="hidden">{{ card.answer }}</div>
 
-{% endif %}
 
-{% if card %}
-
-    <div><p>{{ card.question}} <b>{{card.answer}}</b></div>
-
-{% endif %}
-
-{% endblock %}
+                <button type="button" class="btn btn-primary btn-large"
+                onclick="document.getElementById('answer').innerHTML = '' +
+                '<br><br>{{ card.answer }}'">
+                Display Answer</button>
+                <p id="answer"></p>
+                <h4>Know the Answer?</h4>
+                {{ wtf.quick_form(form)}}
+            {% endif %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
