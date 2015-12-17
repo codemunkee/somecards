@@ -59,9 +59,9 @@ def review_category(category_id):
         session['review'][str(category_id)] = {}
         session['review'][str(category_id)]['current_index'] = 0
 
-    print session['review'][str(category_id)]['current_index']
-
-
+    # If we get a form submission, increment the card number, if the number
+    # we increment to is larger than the number of cards we have then present
+    # the results.
     if form.validate_on_submit():
         session['review'][str(category_id)]['current_index'] += 1
         if session['review'][str(category_id)]['current_index'] >= len(cards):
@@ -69,8 +69,14 @@ def review_category(category_id):
             print 'flashed!'
             session['review'][str(category_id)]['current_index'] = 0
 
+    # Get our current id, question, and answer for sending to the template
+    card_index = session['review'][str(category_id)]['current_index']
+    card.id = cards[card_index][0]
+    card.question = cards[card_index][1]
+    card.answer = cards[card_index][2]
 
-    return render_template('review.html', card=card, form=form)
+    return render_template('review.html', card=card, card_num=card_index + 1,
+                           total_questions=len(cards), form=form)
 
 
 @app.route('/remove/<int:category_id>', methods=['GET', 'POST'])

@@ -1,46 +1,33 @@
-{% extends "base.html" %}}
 {% import "bootstrap/wtf.html" as wtf %}
-
-
+{% extends "base.html" %}}
 {% block content %}
-<div class="container">
-    {% for message in get_flashed_messages() %}
-        <ul>
-            <li>{{ message }}</li>
-        </ul>
-    {% endfor %}
-</div>
-
-
+{{ super() }}
 <div class="container">
     <div class="panel panel-default">
+
         <div class="panel-body" >
-            <div class="well-lg">
             {% if categories %}
-                <h2>Select a category to review:</h2>
+                <h2>Card Categories</h2>
                     {% for category in categories %}
-                    <a href="/review/{{ category.id }}">{{ category.name }}</a></h2>
-                    <br>
+                    <p class="lead">
+                    <a href="/review/{{ category.id }}">{{ category.name }}</a>
+                    </p>
                 {% endfor %}
             {% endif %}
             {% if card %}
-                <div class="page-header">
-                    <h3>Question</h3>
+                <div class="lead">Question {{ card_num }} of {{ total_questions }}</div>
                     {{ card.question}}
-                </div>
                 <div id="myId" class="hidden">{{ card.answer }}</div>
-
-
+                <p></p>
                 <button type="button" class="btn btn-primary btn-large"
                 onclick="document.getElementById('answer').innerHTML = '' +
-                '<br><br>{{ card.answer }}'">
+                '<br>{{ card.answer }}'">
                 Display Answer</button>
                 <p id="answer"></p>
                 <h4>Know the Answer?</h4>
                 {{ wtf.quick_form(form)}}
             {% endif %}
             {% endblock %}
-            </div>
         </div>
     </div>
 </div>
